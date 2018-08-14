@@ -23,6 +23,7 @@ import { svgs, compareByProperty } from 'utilities';
 // ========================= Epics - START
 const handleError = fromAction => error =>
   Observable.of(redux.actions.registerError(fromAction.type, { error, fromAction }));
+const uuidv1 = require('uuid/v1');
 
 export const epics = createEpicScenario({
   /** Initializes the redux state */
@@ -43,10 +44,12 @@ export const epics = createEpicScenario({
     epic: ({ payload }, store) => {
       const diagnosticsOptIn = getDiagnosticsOptIn(store.getState());
       if (diagnosticsOptIn) {
+        payload.eventProperties.SessionId = getSessionId(store.getState());
+        payload.eventProperties.CurrentWindow = getCurrentWindow(store.getState());
         return DiagnosticsService.logEvent(payload)
         /* We don't want anymore action to be executed after this call
             and hence return empty observable */
-          .map(_ => Observable.empty())
+          .flatMap(_ => Observable.empty())
           .catch(_ => Observable.empty())
       } else {
         return Observable.empty()
@@ -141,7 +144,17 @@ export const epics = createEpicScenario({
       GitHubService.getReleaseInfo()
         .map(toActionCreator(redux.actions.getReleaseInformation, fromAction))
         .catch(handleError(fromAction))
+  },
+
+  updateCurrentWindow: {
+    type: 'APP_SET_CURRENT_WINDOW',
+    epic: fromAction => {
+      const action = [];
+      action.push(toActionCreator(redux.actions.updateCurrentWindow, fromAction)(fromAction.payload));
+      return action;
+    }
   }
+
 });
 // ========================= Epics - END
 
@@ -170,7 +183,9 @@ const initialState = {
     name: '',
     diagnosticsOptIn: true
   },
-  userPermissions: new Set()
+  userPermissions: new Set(),
+  sessionId: uuidv1(),
+  currentWindow: ''
 };
 
 const updateUserReducer = (state, { payload, fromAction }) => {
@@ -232,6 +247,10 @@ const setDeviceGroupFlyoutReducer = (state, { payload }) => update(state, {
   deviceGroupFlyoutIsOpen: { $set: !!payload }
 });
 
+const updateCurrentWindow = (state, { payload }) => update(state,
+  { currentWindow: { $set: payload } }
+);
+
 /* Action types that cause a pending flag */
 const fetchableTypes = [
   epics.actionTypes.fetchDeviceGroups,
@@ -254,7 +273,8 @@ export const redux = createReducerScenario({
   updateSolutionSettings: { type: 'APP_UPDATE_SOLUTION_SETTINGS', reducer: updateSolutionSettingsReducer },
   getReleaseInformation: { type: 'APP_GET_VERSION', reducer: releaseReducer },
   setDeviceGroupFlyoutStatus: { type: 'APP_SET_DEVICE_GROUP_FLYOUT_STATUS', reducer: setDeviceGroupFlyoutReducer },
-  updateTimeInterval: { type: 'APP_UPDATE_TIME_INTERVAL', reducer: updateTimeInterval }
+  updateTimeInterval: { type: 'APP_UPDATE_TIME_INTERVAL', reducer: updateTimeInterval },
+  updateCurrentWindow: { type: 'APP_UPDATE_CURRENT_WINDOW', reducer: updateCurrentWindow }
 });
 
 export const reducer = { app: redux.getReducer(initialState) };
@@ -308,4 +328,6 @@ export const getLogoPendingStatus = state =>
 export const getTimeInterval = state => getAppReducer(state).timeInterval;
 
 export const getUserPermissions = state => getAppReducer(state).userPermissions;
+export const getSessionId = state => getAppReducer(state).sessionId;
+export const getCurrentWindow = state => getAppReducer(state).currentWindow
 // ========================= Selectors - END

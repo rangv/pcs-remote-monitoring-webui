@@ -47,7 +47,7 @@ export class Maintenance extends Component {
     if (!this.props.rulesLastUpdated) {
       this.props.fetchRules();
     }
-
+    this.props.updateCurrentWindow('Maintenance');
     this.subscriptions = [];
   }
 
@@ -235,7 +235,8 @@ export class Maintenance extends Component {
       refreshData: this.getData,
       onTimeIntervalChange: this.onTimeIntervalChange,
       timeInterval: this.props.timeInterval,
-      lastUpdated: this.state.lastUpdated
+      lastUpdated: this.state.lastUpdated,
+      logEvent: this.props.logEvent
     };
     const alertProps = {
       isPending: rulesIsPending || alertsIsPending,

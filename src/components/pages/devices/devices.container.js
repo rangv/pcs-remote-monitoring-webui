@@ -10,7 +10,11 @@ import {
   getDevicesLastUpdated,
   getDevicesPendingStatus
 } from 'store/reducers/devicesReducer';
-import { getDeviceGroups, getDeviceGroupError } from 'store/reducers/appReducer';
+import {
+  epics as appEpics,
+  getDeviceGroups,
+  getDeviceGroupError
+} from 'store/reducers/appReducer';
 
 // Pass the devices status
 const mapStateToProps = state => ({
@@ -24,7 +28,8 @@ const mapStateToProps = state => ({
 
 // Wrap the dispatch method
 const mapDispatchToProps = dispatch => ({
-  fetchDevices: () => dispatch(devicesEpics.actions.fetchDevices())
+  fetchDevices: () => dispatch(devicesEpics.actions.fetchDevices()),
+  updateCurrentWindow: (currentWindow) => dispatch(appEpics.actions.updateCurrentWindow(currentWindow))
 });
 
 export const DevicesContainer = translate()(connect(mapStateToProps, mapDispatchToProps)(Devices));
