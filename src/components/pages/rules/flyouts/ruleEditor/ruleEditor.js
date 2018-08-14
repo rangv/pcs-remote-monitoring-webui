@@ -119,7 +119,7 @@ export class RuleEditor extends LinkedComponent {
 
   addCondition = () => {
     this.conditionsLink.set([...this.conditionsLink.value, newCondition()]);
-    this.props.logEvent(toDiagnosticsModel('AddConditionClick', {}));
+    this.props.logEvent(toDiagnosticsModel('Rule_AddConditionClick', {}));
   }
 
   deleteCondition = (index) =>
@@ -172,7 +172,7 @@ export class RuleEditor extends LinkedComponent {
             },
             error => this.setState({ error, isPending: false, changesApplied: true })
           );
-        logEvent(toLogRuleModel('RuleApplyClick', requestProps));
+        logEvent(toLogRuleModel('Rule_ApplyClick', requestProps));
       }
     }
   }
@@ -183,7 +183,7 @@ export class RuleEditor extends LinkedComponent {
       fieldQueryPending: true,
       isPending: true
     });
-    logEvent(toDeviceGroupLogModel('DeviceGroupClick', value));
+    logEvent(toDeviceGroupLogModel('Rule_DeviceGroupClick', value));
     this.getDeviceCountAndFields(value);
     this.formControlChange();
   }
@@ -225,34 +225,34 @@ export class RuleEditor extends LinkedComponent {
   //todo toggle button didn't support link
   onStatusToggle = ({ target: { value } }) => {
     this.setState({ formData: { ...this.state.formData, enabled: value } });
-    this.props.logEvent(toRuleStatusModel('RuleStatus', value ? 'Enabled' : 'Disabled'));
+    this.props.logEvent(toRuleStatusModel('Rule_StatusToggle', value ? 'Enabled' : 'Disabled'));
     this.formControlChange();
   }
 
   onCalculationChange = ({ target: { value: { value = {} } } }) => {
-    this.props.logEvent(toCalculationModel('CalculationClick', value));
+    this.props.logEvent(toCalculationModel('Rule_CalculationClick', value));
     this.formControlChange();
   }
 
   onFieldChange = (index, { target: { value: { value = {} } } }) => {
-    this.props.logEvent(toFieldChosenModel('FieldClick', value, index));
+    this.props.logEvent(toFieldChosenModel('Rule_FieldClick', value, index));
     this.formControlChange();
   }
 
   onOperatorChange = (index, { target: { value: { value = {} } } }) => {
-    this.props.logEvent(toOperatorChosenModel('OperatorClick', value, index));
+    this.props.logEvent(toOperatorChosenModel('Rule_OperatorClick', value, index));
     this.formControlChange();
   }
 
   onSeverityChange = ({ target: { value } }) => {
-    this.props.logEvent(toSeverityModel('SeverityLevelClick', value))
+    this.props.logEvent(toSeverityModel('Rule_SeverityLevelClick', value))
     this.formControlChange();
   }
 
   onCloseClick = () => {
     const { onClose, logEvent } = this.props;
     const rule = { ...this.state.formData };
-    logEvent(toLogRuleModel('CancelClick', rule));
+    logEvent(toLogRuleModel('Rule_CancelClick', rule));
     onClose();
   }
 

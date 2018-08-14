@@ -30,14 +30,14 @@ export class RuleDetailsFlyout extends Component {
     const { logEvent, onClose } = this.props;
 
     if(this.state.isEditable) {
-      logEvent(toDiagnosticsModel('TopXCancelClick', {}));
+      logEvent(toDiagnosticsModel('Rule_TopXCloseClick', {}));
     }
 
     onClose();
   }
 
   goToEditMode = () => {
-    this.props.logEvent(toDiagnosticsModel('EditRuleClick', {}));
+    this.props.logEvent(toDiagnosticsModel('Rule_EditClick', {}));
      this.setState({ isEditable: true });
   }
 

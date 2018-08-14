@@ -10,7 +10,7 @@ export class EditRuleFlyout extends Component {
 
   onTopXClose = () => {
     const { logEvent, onClose } = this.props;
-    logEvent(toDiagnosticsModel('TopXCancelClick', {}));
+    logEvent(toDiagnosticsModel('Rule_TopXCloseClick', {}));
     onClose();
   }
 

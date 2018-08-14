@@ -94,7 +94,7 @@ export class RulesGrid extends Component {
   }
 
   openEditRuleFlyout = () => {
-    this.props.logEvent(toDiagnosticsModel('EditRuleClick', {}));
+    this.props.logEvent(toDiagnosticsModel('Rule_EditClick', {}));
     this.setState({ openFlyoutName: 'edit' });
   }
 

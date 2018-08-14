@@ -62,7 +62,7 @@ export class Rules extends Component {
       selectedRuleId: ''
     });
 
-    logEvent(toDiagnosticsModel('NewRuleClick', {}));
+    logEvent(toDiagnosticsModel('Rule_NewClick', {}));
   }
 
   onGridReady = gridReadyEvent => this.rulesGridApi = gridReadyEvent.api;
