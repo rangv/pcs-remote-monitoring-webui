@@ -3,6 +3,7 @@
 import 'rxjs';
 import { Observable } from 'rxjs';
 import { AuthService, ConfigService, GitHubService, DiagnosticsService } from 'services';
+import moment from 'moment';
 import { schema, normalize } from 'normalizr';
 import { createSelector } from 'reselect';
 import update from 'immutability-helper';
@@ -23,7 +24,6 @@ import { svgs, compareByProperty } from 'utilities';
 // ========================= Epics - START
 const handleError = fromAction => error =>
   Observable.of(redux.actions.registerError(fromAction.type, { error, fromAction }));
-const uuidv1 = require('uuid/v1');
 
 export const epics = createEpicScenario({
   /** Initializes the redux state */
@@ -45,7 +45,7 @@ export const epics = createEpicScenario({
       const diagnosticsOptIn = getDiagnosticsOptIn(store.getState());
       if (diagnosticsOptIn) {
         payload.userProperties = {};
-        payload.userProperties.SessionId = getSessionId(store.getState());
+        payload.sessionId = getSessionId(store.getState());
         payload.userProperties.CurrentWindow = getCurrentWindow(store.getState());
         return DiagnosticsService.logEvent(payload)
         /* We don't want anymore action to be executed after this call
@@ -185,7 +185,7 @@ const initialState = {
     diagnosticsOptIn: true
   },
   userPermissions: new Set(),
-  sessionId: uuidv1(),
+  sessionId: moment().utc().unix(),
   currentWindow: ''
 };
 

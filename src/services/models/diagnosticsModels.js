@@ -3,7 +3,8 @@
 export const toDiagnosticsRequestModel = (request = {}) => ({
   EventType: request.eventType,
   EventProperties: request.eventProperties,
-  UserProperties: request.userProperties
+  UserProperties: request.userProperties,
+  SessionId: request.sessionId
 });
 
 export const toDiagnosticsModel = (eventType, eventProperties) => ({

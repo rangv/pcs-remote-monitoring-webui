@@ -47,6 +47,7 @@ export class Maintenance extends Component {
     if (!this.props.rulesLastUpdated) {
       this.props.fetchRules();
     }
+
     this.props.updateCurrentWindow('Maintenance');
     this.subscriptions = [];
   }
