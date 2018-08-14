@@ -5,6 +5,7 @@ import { translate } from 'react-i18next';
 import {
   epics as appEpics,
   redux as appRedux,
+  getActiveDeviceGroup,
   getAzureMapsKey,
   getSolutionSettingsError,
   getSolutionSettingsPendingStatus,
@@ -29,6 +30,7 @@ import {
 import { Dashboard } from './dashboard';
 
 const mapStateToProps = state => ({
+  activeDeviceGroup: getActiveDeviceGroup(state),
   azureMapsKey: getAzureMapsKey(state),
   azureMapsKeyError: getSolutionSettingsError(state),
   azureMapsKeyIsPending: getSolutionSettingsPendingStatus(state),
