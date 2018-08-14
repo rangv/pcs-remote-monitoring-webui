@@ -65,7 +65,7 @@ export const toCalculationModel = (eventName, calculationType) => {
   return toDiagnosticsModel(eventName, metadata);
 };
 
-export const toDeviceGroupModel = (eventName, deviceGroupName) => {
+export const toDeviceGroupLogModel = (eventName, deviceGroupName) => {
   var metadata = {
     DeviceGroup: deviceGroupName
   };

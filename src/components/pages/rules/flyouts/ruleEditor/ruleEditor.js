@@ -39,7 +39,7 @@ import Config from 'app.config';
 
 import './ruleEditor.css';
 import {
-  toDeviceGroupModel,
+  toDeviceGroupLogModel,
   toCalculationModel,
   toFieldChosenModel,
   toOperatorChosenModel,
@@ -183,7 +183,7 @@ export class RuleEditor extends LinkedComponent {
       fieldQueryPending: true,
       isPending: true
     });
-    logEvent(toDeviceGroupModel('DeviceGroupClick', value));
+    logEvent(toDeviceGroupLogModel('DeviceGroupClick', value));
     this.getDeviceCountAndFields(value);
     this.formControlChange();
   }
