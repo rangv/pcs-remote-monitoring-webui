@@ -17,58 +17,8 @@ export const toLogRuleModel = (eventName, rule) =>
   return toDiagnosticsModel(eventName, metadata);
 }
 
-export const toRuleStatusModel = (eventName, ruleStatusValue) => {
-  var metadata = {
-    RuleStatus: ruleStatusValue
-  };
-
+export const toSinglePropertyLogModel = (eventName, propertyTitle, property) => {
+  var metadata = {};
+  metadata[propertyTitle] = property;
   return toDiagnosticsModel(eventName, metadata);
 }
-
-export const toSeverityModel = (eventName, severityLevelValue) => {
-  var metadata = {
-    SeverityLevel: severityLevelValue
-  };
-
-  return toDiagnosticsModel(eventName, metadata);
-};
-
-export const toOperatorChosenModel = (
-    eventName,
-    operatorChosenValue,
-    conditionNumberValue) => {
-  var metadata = {
-    OperatorChosen: operatorChosenValue,
-    ConditionNumber: conditionNumberValue,
-  };
-
-  return toDiagnosticsModel(eventName, metadata);
-};
-
-export const toFieldChosenModel = (
-    eventName,
-    fieldChosenValue,
-    conditionNumberValue) => {
-  var metadata = {
-    FieldChosen: fieldChosenValue,
-    ConditionNumber: conditionNumberValue
-  };
-
-  return toDiagnosticsModel(eventName, metadata);
-};
-
-export const toCalculationModel = (eventName, calculationType) => {
-  var metadata = {
-    Calculation: calculationType
-  };
-
-  return toDiagnosticsModel(eventName, metadata);
-};
-
-export const toDeviceGroupLogModel = (eventName, deviceGroupName) => {
-  var metadata = {
-    DeviceGroup: deviceGroupName
-  };
-
-  return toDiagnosticsModel(eventName, metadata);
-};

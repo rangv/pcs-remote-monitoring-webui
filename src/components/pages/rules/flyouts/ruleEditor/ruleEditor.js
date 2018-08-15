@@ -33,19 +33,12 @@ import {
   ruleTimePeriods,
   ruleOperators,
   toLogRuleModel,
-  toDiagnosticsModel
+  toDiagnosticsModel,
+  toSinglePropertyLogModel
 } from 'services/models';
 import Config from 'app.config';
 
 import './ruleEditor.css';
-import {
-  toDeviceGroupLogModel,
-  toCalculationModel,
-  toFieldChosenModel,
-  toOperatorChosenModel,
-  toSeverityModel,
-  toRuleStatusModel
-} from 'services/models/logEventModels';
 
 const Section = Flyout.Section;
 
@@ -183,7 +176,7 @@ export class RuleEditor extends LinkedComponent {
       fieldQueryPending: true,
       isPending: true
     });
-    logEvent(toDeviceGroupLogModel('Rule_DeviceGroupClick', value));
+    logEvent(toSinglePropertyLogModel('Rule_DeviceGroupClick', 'DeviceGroup', value));
     this.getDeviceCountAndFields(value);
     this.formControlChange();
   }
@@ -225,27 +218,29 @@ export class RuleEditor extends LinkedComponent {
   //todo toggle button didn't support link
   onStatusToggle = ({ target: { value } }) => {
     this.setState({ formData: { ...this.state.formData, enabled: value } });
-    this.props.logEvent(toRuleStatusModel('Rule_StatusToggle', value ? 'Enabled' : 'Disabled'));
+    this.props.logEvent(toSinglePropertyLogModel('Rule_StatusToggle', 'RuleStatus', value ? 'Enabled' : 'Disabled'));
     this.formControlChange();
   }
 
   onCalculationChange = ({ target: { value: { value = {} } } }) => {
-    this.props.logEvent(toCalculationModel('Rule_CalculationClick', value));
+    this.props.logEvent(toSinglePropertyLogModel('Rule_CalculationClick', 'Calculation', value));
     this.formControlChange();
   }
 
   onFieldChange = (index, { target: { value: { value = {} } } }) => {
-    this.props.logEvent(toFieldChosenModel('Rule_FieldClick', value, index));
+    var eventProperties = { 'FieldChosen': value, 'ConditionNumber': index };
+    this.props.logEvent(toDiagnosticsModel('Rule_FieldClick', eventProperties));
     this.formControlChange();
   }
 
   onOperatorChange = (index, { target: { value: { value = {} } } }) => {
-    this.props.logEvent(toOperatorChosenModel('Rule_OperatorClick', value, index));
+    var eventProperties = { 'OperatorChosen': value, 'ConditionNumber': index };
+    this.props.logEvent(toDiagnosticsModel('Rule_OperatorClick', eventProperties));
     this.formControlChange();
   }
 
   onSeverityChange = ({ target: { value } }) => {
-    this.props.logEvent(toSeverityModel('Rule_SeverityLevelClick', value))
+    this.props.logEvent(toSinglePropertyLogModel('Rule_SeverityLevelClick', 'SeverityLevel', value))
     this.formControlChange();
   }
 
