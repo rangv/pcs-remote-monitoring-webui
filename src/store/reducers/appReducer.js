@@ -44,9 +44,8 @@ export const epics = createEpicScenario({
     epic: ({ payload }, store) => {
       const diagnosticsOptIn = getDiagnosticsOptIn(store.getState());
       if (diagnosticsOptIn) {
-        payload.userProperties = {};
         payload.sessionId = getSessionId(store.getState());
-        payload.userProperties.CurrentWindow = getCurrentWindow(store.getState());
+        payload.eventProperties.CurrentWindow = getCurrentWindow(store.getState());
         return DiagnosticsService.logEvent(payload)
         /* We don't want anymore action to be executed after this call
             and hence return empty observable */
