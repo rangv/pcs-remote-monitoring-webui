@@ -3,7 +3,6 @@
 export const toDiagnosticsRequestModel = (request = {}) => ({
   EventType: request.eventType,
   EventProperties: request.eventProperties,
-  UserProperties: request.userProperties,
   SessionId: request.sessionId
 });
 
