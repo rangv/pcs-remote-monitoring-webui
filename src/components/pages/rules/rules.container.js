@@ -13,6 +13,7 @@ import {
 } from 'store/reducers/rulesReducer';
 import {
   epics as appEpics,
+  redux as appRedux,
   getDeviceGroups
 } from 'store/reducers/appReducer';
 
@@ -29,7 +30,7 @@ const mapStateToProps = state => ({
 // Wrap the dispatch method
 const mapDispatchToProps = dispatch => ({
   fetchRules: () => dispatch(rulesEpics.actions.fetchRules()),
-  updateCurrentWindow: (currentWindow) => dispatch(appEpics.actions.updateCurrentWindow(currentWindow)),
+  updateCurrentWindow: (currentWindow) => dispatch(appRedux.actions.updateCurrentWindow(currentWindow)),
   logEvent: diagnosticsModel => dispatch(appEpics.actions.logEvent(diagnosticsModel))
 });
 

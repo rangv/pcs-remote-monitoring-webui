@@ -144,15 +144,6 @@ export const epics = createEpicScenario({
       GitHubService.getReleaseInfo()
         .map(toActionCreator(redux.actions.getReleaseInformation, fromAction))
         .catch(handleError(fromAction))
-  },
-
-  updateCurrentWindow: {
-    type: 'APP_SET_CURRENT_WINDOW',
-    epic: fromAction => {
-      const action = [];
-      action.push(toActionCreator(redux.actions.updateCurrentWindow, fromAction)(fromAction.payload));
-      return action;
-    }
   }
 
 });
