@@ -20,7 +20,7 @@ export class EditRuleFlyout extends Component {
       <Flyout.Container>
         <Flyout.Header>
           <Flyout.Title>{t('rules.flyouts.editRule')}</Flyout.Title>
-          <Flyout.CloseBtn onClick={ this.onTopXClose } />
+          <Flyout.CloseBtn onClick={this.onTopXClose} />
         </Flyout.Header>
         <Flyout.Content>
           <Protected permission={permissions.updateRules}>{

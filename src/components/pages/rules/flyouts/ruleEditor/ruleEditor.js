@@ -32,9 +32,9 @@ import {
   ruleCalculations,
   ruleTimePeriods,
   ruleOperators,
-  toLogRuleModel,
+  toRuleDiagnosticsModel,
   toDiagnosticsModel,
-  toSinglePropertyLogModel
+  toSinglePropertyDiagnosticsModel
 } from 'services/models';
 import Config from 'app.config';
 
@@ -165,7 +165,7 @@ export class RuleEditor extends LinkedComponent {
             },
             error => this.setState({ error, isPending: false, changesApplied: true })
           );
-        logEvent(toLogRuleModel('Rule_ApplyClick', requestProps));
+        logEvent(toRuleDiagnosticsModel('Rule_ApplyClick', requestProps));
       }
     }
   }
@@ -176,7 +176,7 @@ export class RuleEditor extends LinkedComponent {
       fieldQueryPending: true,
       isPending: true
     });
-    logEvent(toSinglePropertyLogModel('Rule_DeviceGroupClick', 'DeviceGroup', value));
+    logEvent(toSinglePropertyDiagnosticsModel('Rule_DeviceGroupClick', 'DeviceGroup', value));
     this.getDeviceCountAndFields(value);
     this.formControlChange();
   }
@@ -218,12 +218,12 @@ export class RuleEditor extends LinkedComponent {
   //todo toggle button didn't support link
   onStatusToggle = ({ target: { value } }) => {
     this.setState({ formData: { ...this.state.formData, enabled: value } });
-    this.props.logEvent(toSinglePropertyLogModel('Rule_StatusToggle', 'RuleStatus', value ? 'Enabled' : 'Disabled'));
+    this.props.logEvent(toSinglePropertyDiagnosticsModel('Rule_StatusToggle', 'RuleStatus', value ? 'Enabled' : 'Disabled'));
     this.formControlChange();
   }
 
   onCalculationChange = ({ target: { value: { value = {} } } }) => {
-    this.props.logEvent(toSinglePropertyLogModel('Rule_CalculationClick', 'Calculation', value));
+    this.props.logEvent(toSinglePropertyDiagnosticsModel('Rule_CalculationClick', 'Calculation', value));
     this.formControlChange();
   }
 
@@ -240,14 +240,14 @@ export class RuleEditor extends LinkedComponent {
   }
 
   onSeverityChange = ({ target: { value } }) => {
-    this.props.logEvent(toSinglePropertyLogModel('Rule_SeverityLevelClick', 'SeverityLevel', value))
+    this.props.logEvent(toSinglePropertyDiagnosticsModel('Rule_SeverityLevelClick', 'SeverityLevel', value))
     this.formControlChange();
   }
 
   onCloseClick = () => {
     const { onClose, logEvent } = this.props;
     const rule = { ...this.state.formData };
-    logEvent(toLogRuleModel('Rule_CancelClick', rule));
+    logEvent(toRuleDiagnosticsModel('Rule_CancelClick', rule));
     onClose();
   }
 

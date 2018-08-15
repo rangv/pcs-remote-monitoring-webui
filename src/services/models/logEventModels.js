@@ -2,7 +2,7 @@
 
 import { toDiagnosticsModel } from 'services/models';
 
-export const toLogRuleModel = (eventName, rule) =>
+export const toRuleDiagnosticsModel = (eventName, rule) =>
 {
   var metadata = {
     DeviceGroup: rule.groupId,
@@ -17,7 +17,7 @@ export const toLogRuleModel = (eventName, rule) =>
   return toDiagnosticsModel(eventName, metadata);
 }
 
-export const toSinglePropertyLogModel = (eventName, propertyTitle, property) => {
+export const toSinglePropertyDiagnosticsModel = (eventName, propertyTitle, property) => {
   var metadata = {};
   metadata[propertyTitle] = property;
   return toDiagnosticsModel(eventName, metadata);

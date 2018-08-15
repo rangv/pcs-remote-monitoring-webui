@@ -56,12 +56,10 @@ export class Rules extends Component {
 
   openNewRuleFlyout = () => {
     const { logEvent } = this.props;
-
     this.setState({
       openFlyoutName: 'newRule',
       selectedRuleId: ''
     });
-
     logEvent(toDiagnosticsModel('Rule_NewClick', {}));
   }
 

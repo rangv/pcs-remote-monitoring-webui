@@ -28,11 +28,9 @@ export class RuleDetailsFlyout extends Component {
 
   onTopXClose = () => {
     const { logEvent, onClose } = this.props;
-
     if(this.state.isEditable) {
       logEvent(toDiagnosticsModel('Rule_TopXCloseClick', {}));
     }
-
     onClose();
   }
 
