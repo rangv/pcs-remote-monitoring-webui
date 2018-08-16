@@ -4,7 +4,7 @@ import { toDiagnosticsModel } from 'services/models';
 
 export const toRuleDiagnosticsModel = (eventName, rule) =>
 {
-  var metadata = {
+  const metadata = {
     DeviceGroup: rule.groupId,
     Calculation : rule.calculation,
     TimePeriod: rule.timePeriod,
@@ -18,7 +18,6 @@ export const toRuleDiagnosticsModel = (eventName, rule) =>
 }
 
 export const toSinglePropertyDiagnosticsModel = (eventName, propertyTitle, property) => {
-  var metadata = {};
-  metadata[propertyTitle] = property;
+  const metadata = { [propertyTitle]: property };
   return toDiagnosticsModel(eventName, metadata);
 }
