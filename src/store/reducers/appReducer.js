@@ -48,7 +48,7 @@ export const epics = createEpicScenario({
         payload.eventProperties.CurrentWindow = getCurrentWindow(store.getState());
         return DiagnosticsService.logEvent(payload)
         /* We don't want anymore action to be executed after this call
-            and hence return empty observable */
+            and hence return empty observable in flatMap */
           .flatMap(_ => Observable.empty())
           .catch(_ => Observable.empty())
       } else {
