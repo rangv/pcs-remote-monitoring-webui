@@ -4,8 +4,8 @@ import React, { Component } from 'react';
 
 import { permissions } from 'services/models';
 import { DevicesGrid } from './devicesGrid';
-import { DeviceGroupDropdownContainer as DeviceGroupDropdown } from 'components/app/deviceGroupDropdown';
-import { ManageDeviceGroupsBtnContainer as ManageDeviceGroupsBtn } from 'components/app/manageDeviceGroupsBtn';
+import { DeviceGroupDropdownContainer as DeviceGroupDropdown } from 'components/shell/components/deviceGroupDropdown';
+import { ManageDeviceGroupsBtnContainer as ManageDeviceGroupsBtn } from 'components/shell/components/manageDeviceGroupsBtn';
 import {
   AjaxError,
   Btn,

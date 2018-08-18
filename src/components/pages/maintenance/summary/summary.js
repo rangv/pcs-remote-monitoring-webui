@@ -5,9 +5,9 @@ import React from 'react';
 import { Route, Switch } from 'react-router-dom';
 import { NavLink } from 'react-router-dom';
 
-import { DeviceGroupDropdownContainer as DeviceGroupDropdown } from 'components/app/deviceGroupDropdown';
-import { ManageDeviceGroupsBtnContainer as ManageDeviceGroupsBtn } from 'components/app/manageDeviceGroupsBtn';
-import { TimeIntervalDropdown } from 'components/app/timeIntervalDropdown';
+import { DeviceGroupDropdownContainer as DeviceGroupDropdown } from 'components/shell/components/deviceGroupDropdown';
+import { ManageDeviceGroupsBtnContainer as ManageDeviceGroupsBtn } from 'components/shell/components/manageDeviceGroupsBtn';
+import { TimeIntervalDropdown } from 'components/shell/components/timeIntervalDropdown';
 import { Notifications } from './notifications';
 import { Jobs } from './jobs';
 import {
